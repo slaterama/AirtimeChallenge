@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.util.SparseArray;
 
@@ -45,6 +46,9 @@ public class GanymedeService extends Service
    private static final boolean DEBUG = true;
 
    private static final String TAG = GanymedeService.class.getSimpleName();
+
+   public static final String ACTION_FINISHED = "finished";
+   public static final String EXTRA_RESPONSE = "response";
 
    /**
     * Class that manages HTTP requests.
@@ -350,6 +354,10 @@ public class GanymedeService extends Service
          Log.d(TAG, response.getResponse());
          Log.d(TAG, "**************************************************");
       }
+
+      Intent intent = new Intent(ACTION_FINISHED);
+      intent.putExtra(EXTRA_RESPONSE, response.getResponse());
+      LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
    }
 
    private void handleNotFoundResponse(NotFoundResponse response) {
