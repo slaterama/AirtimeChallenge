@@ -1,0 +1,11 @@
+<resources>
+  <string name="app_name">Airtime</string>
+
+  <string name="main_connecting">Connecting to Ganymede service…</string>
+  <string name="main_connected">Connected to Ganymede service</string>
+  <string name="main_disconnected">Disconnected from Ganymede service</string>
+  <string name="main_start">Start</string>
+
+  <string name="request_error">An error occurred.</string>
+  <string name="request_error_message">An error occurred: %s</string>
+</resources>
