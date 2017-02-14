@@ -23,6 +23,8 @@ import com.slaterama.airtime.GanymedeService.GanymedeBinder;
 public class MainActivity extends AppCompatActivity
       implements ServiceConnection {
 
+   private static final String KEY_RESPONSE = "response";
+
    private TextView mStatusText;
    private Button mStartButton;
    private TextView mResponseText;
@@ -52,6 +54,11 @@ public class MainActivity extends AppCompatActivity
 
       Intent intent = new Intent(this, GanymedeService.class);
       startService(intent);
+
+      if (savedInstanceState != null) {
+         mResponseText.setText(
+             savedInstanceState.getCharSequence(KEY_RESPONSE));
+      }
    }
 
    @Override
@@ -74,6 +81,12 @@ public class MainActivity extends AppCompatActivity
 
       LocalBroadcastManager.getInstance(this)
           .unregisterReceiver(mBroadcastReceiver);
+   }
+
+   @Override
+   protected void onSaveInstanceState(Bundle outState) {
+      super.onSaveInstanceState(outState);
+      outState.putCharSequence(KEY_RESPONSE, mResponseText.getText());
    }
 
    @Override
